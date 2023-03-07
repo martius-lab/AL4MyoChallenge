@@ -5,7 +5,10 @@ import numpy as np
 import torch
 from tonic import logger
 
-from al4myochallenge.custom_test_environment import test_baoding, test_die_reorient
+from al4myochallenge.custom_test_environment import (
+    test_baoding,
+    test_die_reorient,
+)
 
 
 class Trainer:

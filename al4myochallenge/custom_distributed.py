@@ -177,7 +177,7 @@ class Parallel:
 
     def step(self, actions):
         actions_list = np.split(actions, self.worker_groups)
-        for actions, pipe in zip(actions_list, self.action_pipes, strict=True):
+        for actions, pipe in zip(actions_list, self.action_pipes):
             pipe.send(actions)
 
         for _ in range(self.worker_groups):
