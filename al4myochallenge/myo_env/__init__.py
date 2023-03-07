@@ -1,0 +1,1 @@
+from al4myochallenge.myo_env import register_myosuite
