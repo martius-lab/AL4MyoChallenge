@@ -200,8 +200,6 @@ def train(
     eff_path = os.path.join(path, environment_name, name)
 
     tonic.logger.initialize(eff_path, script_path=__file__, config=args)
-    if checkpoint_path:
-        tonic.logger.load(checkpoint_path)
 
     # Build the trainer.
     trainer = trainer or "tonic.Trainer()"

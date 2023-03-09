@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 import gym
 import numpy as np
 import scipy.stats
+import tonic
 from tonic import logger
 
 import al4myochallenge.utils as utils
@@ -154,3 +155,14 @@ class ExceptionWrapper(GymWrapper):
             done = 1
             self.reset()
         return observation, reward, done, info
+
+
+def apply_wrapper(env):
+    return ExceptionWrapper(env)
+
+
+def env_tonic_compat(env, preid=5, parallel=1, sequential=1):
+    """
+    Applies wrapper for tonic and passes random seed.
+    """
+    return lambda identifier=0: apply_wrapper(eval(env))

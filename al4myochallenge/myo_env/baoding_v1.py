@@ -60,6 +60,9 @@ class BaodingEnvV1(BaseV0):
         )
         self._setup(**kwargs)
 
+    def render(self, *args, **kwargs):
+        self.mj_render()
+
     def _setup(
         self,
         frame_skip: int = 10,

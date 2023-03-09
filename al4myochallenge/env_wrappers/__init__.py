@@ -1,5 +1,7 @@
-from al4myochallenge.env_wrappers.wrappers import ExceptionWrapper, GymWrapper
+from al4myochallenge.env_wrappers.wrappers import (
+    ExceptionWrapper,
+    apply_wrapper,
+    env_tonic_compat,
+)
 
-
-def apply_wrapper(env):
-    return ExceptionWrapper(env)
+__all__ = [apply_wrapper, env_tonic_compat, apply_wrapper]

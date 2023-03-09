@@ -4,6 +4,8 @@ import os
 
 import numpy as np
 
+from al4myochallenge import env_wrappers
+
 
 class Sequential:
     """A group of environments used in sequence."""
@@ -203,7 +205,9 @@ def distribute(
 ):
     """Distributes workers over parallel and sequential groups."""
 
-    dummy_environment = build_env_from_dict(build_dict)()
+    dummy_environment = env_wrappers.apply_wrapper(
+        build_env_from_dict(build_dict)()
+    )
     max_episode_steps = dummy_environment._max_episode_steps
     del dummy_environment
 
@@ -225,34 +229,8 @@ def distribute(
 
 def build_env_from_dict(build_dict):
     if type(build_dict) == dict:
-        from al4myochallenge.utils import env_tonic_compat
+        from al4myochallenge.env_wrappers import env_tonic_compat
 
         return env_tonic_compat(**build_dict)
     else:
-        return build_dict
-
-
-def external_proc(
-    output_queue,
-    action_pipe,
-    index,
-    seed,
-    build_dict,
-    max_episode_steps,
-    workers_per_group,
-    env_args,
-):
-    """Process holding a sequential group of environments."""
-    # import sconegym
-    envs = Sequential(
-        build_dict, max_episode_steps, workers_per_group, index, env_args
-    )
-    envs.initialize(seed)
-
-    observations = envs.start()
-    output_queue.put((index, observations))
-
-    while True:
-        actions = action_pipe.recv()
-        out = envs.step(actions)
-        output_queue.put((index, out))
+        return lambda identifier=0: build_dict()
