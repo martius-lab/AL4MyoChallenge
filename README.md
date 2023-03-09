@@ -8,7 +8,7 @@ Members:
 * Pierre Schumacher
 * Georg Martius
 * Daniel Häufle
-## Installation
+## Usage
 To run it, first install the environment
 
 ```
@@ -20,6 +20,11 @@ poetry shell
 then run
 
 `python -m al4myochallenge.main baoding_verification.json`
+
+To load and visualize a policy after training, run
+
+`python -m al4myochallenge.play --path baoding_p2/baoding_test/`
+
 ## Performance
 We achieved 98% in phase 1 and 41% in phase 2, which landed us the second place in the baoding balls task.
 <p align="center">
